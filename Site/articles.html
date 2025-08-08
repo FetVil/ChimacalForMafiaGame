@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статьи по химии</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Статьи по химии</h1>
+    <a href="index.html" class="level-btn">Назад к головоломкам</a>
+    <div id="articles-list" class="articles-list"></div>
+
+    <script src="articles.js"></script>
+    <script>
+        function loadArticles() {
+            const articlesList = document.getElementById('articles-list');
+            articlesList.innerHTML = '';
+            articles.forEach((article, index) => {
+                const articleEl = document.createElement('div');
+                articleEl.className = 'article';
+                articleEl.innerHTML = `
+                    <h2>${article.title}</h2>
+                    <p>${article.content}</p>
+                `;
+                articlesList.appendChild(articleEl);
+            });
+        }
+
+        loadArticles();
+    </script>
+</body>
+</html>

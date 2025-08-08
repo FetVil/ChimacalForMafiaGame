@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головоломки по химическим формулам</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="startLevel('medium')">
+    <h1>Головоломки по химическим формулам</h1>
+    <div class="level-selection">
+        <button class="level-btn" onclick="startLevel('easy')">Легкий уровень</button>
+        <button class="level-btn" onclick="startLevel('medium')">Средний уровень</button>
+        <button class="level-btn" onclick="startLevel('hard')">Сложный уровень</button>
+        <a href="articles.html" class="level-btn">Статьи</a>
+        <button class="level-btn" onclick="showAdminPanel()" id="admin-btn">Админ панель</button>
+    </div>
+
+    <div id="easy-puzzle" class="puzzle-container">
+        <div class="description" id="easy-desc"></div>
+        <div class="cards-container" id="easy-cards" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="drop-zone" id="easy-drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <button class="submit-btn" onclick="checkAnswer('easy')">Проверить</button>
+        <div class="feedback" id="easy-feedback"></div>
+    </div>
+
+    <div id="medium-puzzle" class="puzzle-container">
+        <div class="description" id="medium-desc"></div>
+        <div class="cards-container" id="medium-cards" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="drop-zone" id="medium-drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <button class="submit-btn" onclick="checkAnswer('medium')">Проверить</button>
+        <div class="feedback" id="medium-feedback"></div>
+    </div>
+
+    <div id="hard-puzzle" class="puzzle-container">
+        <div class="description" id="hard-desc"></div>
+        <input type="text" class="text-input" id="hard-input" placeholder="Введите формулу, например: CH4 + 2O2 => CO2 + 2H2O">
+        <button class="submit-btn" onclick="checkAnswer('hard')">Проверить</button>
+        <div class="feedback" id="hard-feedback"></div>
+    </div>
+
+    <div id="admin-panel" class="admin-panel">
+        <h2>Админ панель</h2>
+        <button class="admin-export-btn" onclick="exportData()">Экспорт data.js</button>
+        <div class="admin-list" id="admin-list"></div>
+        <h3>Добавить новую головоломку</h3>
+        <form class="admin-form" onsubmit="addPuzzle(event)">
+            <label for="admin-level">Уровень:</label>
+            <select id="admin-level">
+                <option value="easy">Легкий</option>
+                <option value="medium">Средний</option>
+                <option value="hard">Сложный</option>
+            </select>
+            <label for="admin-desc">Описание:</label>
+            <textarea id="admin-desc" placeholder="Описание процесса"></textarea>
+            <label for="admin-cards">Карточки (для легкого/среднего, через запятую):</label>
+            <input type="text" id="admin-cards" placeholder="Например: 2,H2,+,O2,=>,2,H2O">
+            <label for="admin-correct">Правильная формула:</label>
+            <input type="text" id="admin-correct" placeholder="Например: 2H2 + O2 => 2H2O" required>
+            <button type="submit" class="admin-add-btn">Добавить</button>
+        </form>
+        <div class="feedback" id="admin-feedback"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
